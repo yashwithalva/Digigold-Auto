@@ -22,7 +22,7 @@ def create_address() -> str:
     return address_id
     
     
-def create_company(address_id, name='company', acc_name='Account name') -> str:
+def create_company(address_id, name=api_config.COMPANY_NAME, acc_name='Account name') -> str:
     """
     Create a new Company
     Args:
