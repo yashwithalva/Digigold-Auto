@@ -51,3 +51,6 @@ COMMISSION_TAX_TEMPLATE_URL = '/v1/api/taxTemplates/commission'
 
 CREATE_TAX_TEMPLATE_MAPPING_URL = '/v1/api/taxTemplateMapping'
 COMMISSION_TAX_TEMPLATE_MAPPING_URL = '/v1/api/taxTemplateMapping/commission'
+
+CREATE_MATERIAL_TRANSFER_TYPE_URL = '/v1/api/materialTransferTypes'
+COMMISSION_MATERIAL_TRANSFER_TYPE_URL = '/v1/api/materialTransferTypes/commission'

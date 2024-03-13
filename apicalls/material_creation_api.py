@@ -58,7 +58,7 @@ def create_material(supplier_id) -> str:
 
 
 def commission_material(material_id) -> bool:
-    res = requests.post(HOST + COMMISSION_MATERIAL_URL, headers=HEADER_INFO, params=get_request_param(material_id),
+    res = requests.get(HOST + COMMISSION_MATERIAL_URL, headers=HEADER_INFO, params=get_request_param(material_id),
                         data=json.dumps({}))
     print(res.json())
     return res.json()['success']

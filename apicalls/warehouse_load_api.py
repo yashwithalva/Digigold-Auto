@@ -117,6 +117,26 @@ def commission_warehouse(warehouse_id) -> bool:
     return res.json()['success']
 
 
+def create_warehouse_material_transfer_type(transfer_type):
+    req_body = {
+        'type': transfer_type
+    }
+    res = requests.post(HOST + CREATE_MATERIAL_TRANSFER_TYPE_URL, headers=HEADER_INFO, data=json.dumps(req_body))
+    material_transfer_id = res.json()['data']['id']
+    print(f'Created Warehouse with id: {material_transfer_id}')
+    return material_transfer_id
+
+
+def commission_warehouse_material_transfer_type(material_transfer_id):
+    req_param = {
+        "id": material_transfer_id
+    }
+    res = requests.post(HOST + COMMISSION_MATERIAL_TRANSFER_TYPE_URL, headers=HEADER_INFO, params=req_param)
+    msg = res.json()['data']
+    print(f'[MESSAGE]: {msg}')
+    return res.json()['success']
+
+
 def create_po(company_id, target_warehouse) -> str:
     """
     Create a Purchase Order
@@ -132,6 +152,7 @@ def create_po(company_id, target_warehouse) -> str:
 
     json_body = json.dumps(warehouse_load_dto.create_po_req)
     res = requests.post(HOST + CREATE_PURCHASE_ORDER_URL, headers=HEADER_INFO, data=json_body)
+    print(res.json())
     po_id = res.json()['data']['id']
     print(po_id)
     return po_id
@@ -168,6 +189,7 @@ def create_pi(po_id) -> str:
 
     json_body = json.dumps(warehouse_load_dto.create_pi_req)
     res = requests.post(HOST + CREATE_PURCHASE_INVOICE_URL, headers=HEADER_INFO, data=json_body)
+    print(res.json())
     pi_id = res.json()['data']['id']
     print(pi_id)
     return pi_id
@@ -461,3 +483,25 @@ def create_racks_and_load(warehouse_id):
     commission_racks(warehouse_id)
     load_racks(warehouse_id)
     print("Racks loaded successfully")
+
+def create_and_commission_all_material_transfer_types():
+    transfer_types = [
+        'PARENT_WAREHOUSE_LOAD',
+        'PARENT_WAREHOUSE_UNLOAD',
+        'WAREHOUSE_PARENT_TO_CHILD_TRANSFER',
+        'WAREHOUSE_CHILD_TO_PARENT_TRANSFER',
+        'WAREHOUSE_IN_TO_OUT_RACK_MATERIAL_TRANSFER',
+        'WAREHOUSE_OUT_TO_IN_RACK_MATERIAL_TRANSFER',
+        'WAREHOUSE_IN_RACK_REBALANCING_MATERIAL_TRANSFER',
+        'WAREHOUSE_IN_RACK_REBALANCEING_REVERSE_MATERIAL_TRANSFER',
+        'WAREHOUSE_OUT_RACK_REBALANCING_MATERIAL_TRANSFER',
+        'WAREHOUSE_OUT_RACK_REBALANCEING_REVERSE_MATERIAL_TRANSFER',
+        'WAREHOUSE_OUT_RACK_LOAD_MATERIAL_TRANSFER',
+        'WAREHOUSE_OUT_RACK_UNLOAD_MATERIAL_TRANSFER']
+
+    for type_name in transfer_types:
+        material_transfer_id = create_warehouse_material_transfer_type(type_name)
+        commission_warehouse_material_transfer_type(material_transfer_id)
+
+    return True
+

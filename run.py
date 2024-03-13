@@ -13,29 +13,32 @@ def material_setup_script() -> bool:
     create_and_commission_material_type()
 
     print("\nCreating Supplier: ")
-    supplier_id = create_and_commission_supplier('Supplier-GS', address_id)
+    supplier_id = create_and_commission_supplier('Supplier', address_id)
+
+    print("\nCreating Material: ")
     material_id = create_and_commission_material(supplier_id)
 
     print("\nCreate Tax Template: ")
-    tax_template_sell_id = create_and_commission_tax_template("Tax-Template Sell", 1.5, 1.5)
-    tax_template_buy_id = create_and_commission_tax_template("Tax-Template Buy", 0, 0)
-    tax_template_company_buy_id = create_and_commission_tax_template("Tax-Template Company Buy", 1.5, 1.5)
-    tax_template_company_sell_id = create_and_commission_tax_template("Tax-Template Company Sell", 1.5, 1.5)
+    tax_template_150_id = create_and_commission_tax_template("FLOW TEST Tax-Template", 1.5, 1.5)
+    tax_template_00_id = create_and_commission_tax_template("Tax-Template Individual Buy", 0, 0)
 
-    create_and_commission_tax_template_mapping(tax_template_sell_id,
+    print("\nCreating Tax Template Mapping: ")
+    create_and_commission_tax_template_mapping(tax_template_150_id,
                                                MATERIAL_CODE,
                                                "SELL",
                                                "INDIVIDUAL")
-    create_and_commission_tax_template_mapping(tax_template_buy_id,
+
+    create_and_commission_tax_template_mapping(tax_template_00_id,
                                                MATERIAL_CODE,
                                                "BUY",
                                                "INDIVIDUAL")
 
-    create_and_commission_tax_template_mapping(tax_template_company_buy_id,
+    create_and_commission_tax_template_mapping(tax_template_150_id,
                                                MATERIAL_CODE,
                                                "SELL",
                                                "COMPANY")
-    create_and_commission_tax_template_mapping(tax_template_company_sell_id,
+
+    create_and_commission_tax_template_mapping(tax_template_150_id,
                                                MATERIAL_CODE,
                                                "BUY",
                                                "COMPANY")
@@ -54,8 +57,10 @@ def warehouse_load_script() -> bool:
     """
     A Default script to Load material to warehouse
     """
+    create_and_commission_all_material_transfer_types()
+
     warehouse_lst = []
-    randstr = ' ' + randomword(5)
+    randstr = ' ' + randomword(3)
     print(randstr)
 
     # Create Address
@@ -64,7 +69,7 @@ def warehouse_load_script() -> bool:
 
     # Create Company
     print("\n>> COMPANY")
-    company_name = f'Company {randstr}'
+    company_name = f'{warehouse_load_config.NAMING_PREFIX}Company {randstr}'
     company_id = create_and_commission_company(addr_id, company_name)
 
     print("\n>> WAREHOUSE")
@@ -85,24 +90,16 @@ def warehouse_load_script() -> bool:
 
     return True
 
-
-def material_transaction_script() -> bool:
-    """
-    A script to perform material transaction
-    """
-
-    return True
-
-
 def temporary_script():
-    address_id = "ADD-01HQB15ZY1S9V8W4HE4J4K2G1V"
-    company_id = "COM-01HQB15ZZXNM0TRYA7KQYN00XS"
-    gor_id = "GOR-01HQB160CM1MMJ12346KX7C337"
-    transit_warehouse_id = "WAR-01HQB16014XSM46Z4CR0GS3HNF"
-    store_warehouse_id = "WAR-01HQB1601VZH2XWMHSJNGAZ3SF"
-    warehouse_lst = ["WAR-01HQB16014XSM46Z4CR0GS3HNF", "WAR-01HQB1601VZH2XWMHSJNGAZ3SF"]
+    address_id = "ADD-01HR4DNSEY8BD6WDHQ3JB45RWK"
+    company_id = "COM-01HR4DNSG3RVBP72F30X27W3V1"
+    transit_warehouse_id = "WAR-01HR4DNSHVBSWXGZFQSC4DNYSW"
+    store_warehouse_id = "WAR-01HR4DNSJZE4MPJGQFV1KDQNTW"
+    warehouse_lst = ["WAR-01HR4DNSHVBSWXGZFQSC4DNYSW", "WAR-01HR4DNSJZE4MPJGQFV1KDQNTW"]
 
-    print(complete_gr(gor_id))
+    print("\n>> PO, PI & GR")
+    #load_material_to_parent(company_id, warehouse_lst[0])
+    complete_gr("GOR-01HR4DNSXFRVK8N9GYCM0P54K2")
 
     # Material Transfer
     print("\n>> Material Transfer")
@@ -117,3 +114,4 @@ if __name__ == "__main__":
     # material_setup_script()
     # warehouse_load_script()
     temporary_script()
+    # create_and_commission_all_material_transfer_types()

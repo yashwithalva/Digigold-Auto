@@ -2,7 +2,7 @@ from helpers.helpers import randomword
 from constants import warehouse_load_config
 
 create_addr_req = {
-    'address1': warehouse_load_config.NAMING_PREFIX + ' ADDR ' + randomword(10),
+    'address1': warehouse_load_config.NAMING_PREFIX + ' ADDR ' + randomword(3),
     'city': 'Bangalore',
     'state': 'Karnataka',
     'pinCode': '574239',
@@ -108,4 +108,8 @@ create_racks_req = {
     'type': '',
     'capacity': warehouse_load_config.RACK_CAPACITY,
     'materialCode': warehouse_load_config.MATERIAL_CODE
+}
+
+data = {
+    "response": "asdasd"
 }
