@@ -45,14 +45,6 @@ def material_setup_script() -> bool:
     return True
 
 
-def tenant_users_add_script(number_of_users) -> bool:
-    """
-    A script to add tenant users
-    """
-
-    return True
-
-
 def warehouse_load_script() -> bool:
     """
     A Default script to Load material to warehouse
@@ -90,28 +82,9 @@ def warehouse_load_script() -> bool:
 
     return True
 
-def temporary_script():
-    address_id = "ADD-01HR4DNSEY8BD6WDHQ3JB45RWK"
-    company_id = "COM-01HR4DNSG3RVBP72F30X27W3V1"
-    transit_warehouse_id = "WAR-01HR4DNSHVBSWXGZFQSC4DNYSW"
-    store_warehouse_id = "WAR-01HR4DNSJZE4MPJGQFV1KDQNTW"
-    warehouse_lst = ["WAR-01HR4DNSHVBSWXGZFQSC4DNYSW", "WAR-01HR4DNSJZE4MPJGQFV1KDQNTW"]
-
-    print("\n>> PO, PI & GR")
-    #load_material_to_parent(company_id, warehouse_lst[0])
-    complete_gr("GOR-01HR4DNSXFRVK8N9GYCM0P54K2")
-
-    # Material Transfer
-    print("\n>> Material Transfer")
-    material_transfer_from_root_to_store(warehouse_lst, company_id)
-
-    # Creating rack
-    print("\n>> Create Racks")
-    create_racks_and_load(warehouse_lst[-1])
-
 
 if __name__ == "__main__":
-    # material_setup_script()
+    material_setup_script()
     # warehouse_load_script()
-    temporary_script()
+    # temporary_script()
     # create_and_commission_all_material_transfer_types()

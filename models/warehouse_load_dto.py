@@ -80,7 +80,7 @@ create_gr_req = {
     'purchaseOrderId': '',
     'deliveryDate': '2023-12-24',
     'deliveryType': 'SELF',
-    'deliveryPartnerId': warehouse_load_config.MATERIAL_VENDOR,
+    'deliveryPartnerId': "",
     'deliveryBy': 'Myself'
 }
 
