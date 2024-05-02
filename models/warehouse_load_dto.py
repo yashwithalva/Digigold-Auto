@@ -1,5 +1,6 @@
 from helpers.helpers import randomword
 from constants import warehouse_load_config
+from constants import material_setup_config
 
 create_addr_req = {
     'address1': warehouse_load_config.NAMING_PREFIX + ' ADDR ' + randomword(3),
@@ -45,7 +46,7 @@ create_po_req = {
     'type': 'COMPANY',
     'purchaseOrderItems': [
         {
-            'materialCode': warehouse_load_config.MATERIAL_CODE,
+            'materialCode': material_setup_config.MATERIAL_CODE,
             'quantity': warehouse_load_config.MATERIAL_LOAD_QUANTITY,
             'rate': warehouse_load_config.MATERIAL_LOAD_PRICE
         }
@@ -66,7 +67,7 @@ create_pi_req = {
     'paymentMadeAt': '2023-12-11',
     'purchaseInvoiceItems': [
         {
-            'materialCode': warehouse_load_config.MATERIAL_CODE,
+            'materialCode': material_setup_config.MATERIAL_CODE,
             'quantity': warehouse_load_config.MATERIAL_LOAD_QUANTITY,
             'rate': warehouse_load_config.MATERIAL_LOAD_PRICE
         }
@@ -91,7 +92,7 @@ parent_to_child_mt_req = {
     'companyId': '',
     'materialTransferItems': [
         {
-            'materialCode': warehouse_load_config.MATERIAL_CODE,
+            'materialCode': material_setup_config.MATERIAL_CODE,
             'quantity': warehouse_load_config.MATERIAL_LOAD_QUANTITY
         }
     ],
@@ -107,7 +108,7 @@ create_racks_req = {
     'count': warehouse_load_config.NUMBER_OF_RACKS,
     'type': '',
     'capacity': warehouse_load_config.RACK_CAPACITY,
-    'materialCode': warehouse_load_config.MATERIAL_CODE
+    'materialCode': material_setup_config.MATERIAL_CODE
 }
 
 data = {

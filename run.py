@@ -84,7 +84,18 @@ def warehouse_load_script() -> bool:
 
 
 if __name__ == "__main__":
-    material_setup_script()
+    """
+    1. Setup material_setup_config before running material_setup_config.
+    2. Call material_setup_script to setup Material and Tax. 
+        -> Copy the supplier Id from console and set it in warehouse_load_config.
+    3. Setup warehouse load config.
+    4. Add run Warehouse load script.
+        -> This script populates warehouse with material
+        -> It also loads the warehouse racks with material
+        -> Setup attributes for loading the warehouse racks with
+           material in warehouse load config.
+    """
+    # material_setup_script()
     # warehouse_load_script()
     # temporary_script()
     # create_and_commission_all_material_transfer_types()
